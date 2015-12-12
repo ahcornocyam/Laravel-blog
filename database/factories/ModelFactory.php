@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,3 +21,10 @@ $factory->define(Blog\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(Blog\Post::class, function (Faker\Generator $faker ){
+	return [
+			'title' 	=> $faker->sentence,
+			'content'	=> $faker->text
+	];
+} );

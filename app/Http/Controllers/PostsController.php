@@ -18,6 +18,8 @@ class PostsController extends Controller
 	}
 	
 	public function post( $id) {
-		return $id;
+		$post = Blog\Post::find( $id );
+		$posts =  Blog\Post::all(['id','title']);
+		return view( 'posts.post',compact( ['post','posts'] ) );
 	}
 }

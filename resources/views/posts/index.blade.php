@@ -12,7 +12,7 @@
 		@foreach( $posts as $post )
 			<article class="panel panel-default">
 				<header class="panel-heading">
-					<h1>{{$post->title}}</h1><small>{{$post->created_at}}</small>
+					<h1><a href="{{ route( 'blog.post',['id'=> $post->id] ) }}">{{$post->title}}</a></h1><small>{{$post->created_at}}</small>
 				</header>				
 				<section class="panel-body">
 					<p>
