@@ -1,5 +1,6 @@
 <?php
 
+use Blog\Http\Controllers\PostsController;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,3 +15,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group( [ 'prefix'=>'blog','where'=>[ 'id'=>'[0-9]+' ] ],function(){
+	get( '/',[ 'as'=> 'blog', 'uses'=>'PostsController@index' ] );
+	get( '/{id?}/post',[ 'as'=> 'blog.post', 'uses'=>'PostsController@post' ] );
+} );
