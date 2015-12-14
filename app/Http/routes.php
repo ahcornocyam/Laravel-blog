@@ -11,12 +11,17 @@ use Blog\Http\Controllers\PostsController;
 | and give it the controller to call when that URI is requested.
 |
 */
-
+Route::controllers(
+		[
+			'auth'				=> 'Auth\AuthController',
+			'password'		=> 'Auth\PasswordController',
+		]
+);
 Route::group( [ 'prefix'=>'/','where'=>[ 'id'=>'[0-9]+' ] ],function(){
 	get( '/',[ 'as'=> 'blog', 'uses'=>'PostsController@index' ] );
 	get( '/{id?}/post',[ 'as'=> 'blog.post', 'uses'=>'PostsController@post' ] );
 } );
-Route::group( [ 'prefix' => 'admin', 'where' => ['id' => '[0-9]+'] ], function(){
+Route::group( [ 'prefix' => 'admin','middleware'=>'auth', 'where' => ['id' => '[0-9]+'] ], function(){
 	get('/', ['as' => 'admin', 'uses' => 'PostAdminController@index'] );
 	get( '/posts/novo', [ 'as'=> 'admin.create', 'uses' => 'PostAdminController@create' ] );
 	post( '/posts/store', ['as' =>'admin.store', 'uses'=> 'PostAdminController@store'] );

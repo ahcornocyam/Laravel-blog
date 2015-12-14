@@ -19,6 +19,15 @@
 			@endif
 			{!! Form::open( [ 'route'=>'admin.store', 'method'=>'post' ] ) !!}
 					@include( 'admin.post.form' )
+					<div class="form-group">
+					  {!! Form::label( 'tags', 'Tags:',['class'=> 'form-control-label'] ) !!}
+						{!! Form::text( 'tags', null, [ 'class'=> 'form-control' ] ) !!}
+					</div>
+					<div class="form-group-lg">
+					    {!! Form::submit( 'Salvar',[ 'class'=>'btn btn-lg btn-primary' ] ) !!}
+					    <a href="{{ route('admin') }}" class="btn btn-lg btn-default">Voltar</a>
+					</div>
+
 			{!! Form::close()!!}
 	</div>
 </div>

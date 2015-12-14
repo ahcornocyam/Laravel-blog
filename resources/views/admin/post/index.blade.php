@@ -10,7 +10,7 @@
 		  	</div>
 		  </header>
 			<div class="col-md-offset-1 col-lg-10 col-md-offset-1">
-					<a href="{{ route('admin.create') }}"> novo post</a>
+					<a href="{{ route('admin.create') }}" class="btn btn-success btn-lg">Novo Post</a>
 					<table class="table table-responsive table-hover">
 						<thead>
 							<tr>
@@ -26,8 +26,8 @@
 								<td>{{ $post->id }}</td>
 								<td>{{ $post->title }}</td>
 								<td>{{ $post->created_at }}</td>
-								<td><a href="{{ route( 'admin.edit',[ 'id' => $post->id ] ) }}" alt="editar"><i class="glyphicon glyphicon-edit"></i></a> |
-								<a href="{{ route( 'admin.delete', [ 'id' => $post->id ] ) }}" alt="excluir"><i class="glyphicon glyphicon-remove"></a></td>
+								<td><a href="{{ route( 'admin.edit',[ 'id' => $post->id ] ) }}" alt="editar"><i class="btn btn-lg glyphicon glyphicon-edit alert-warning"></i></a>  |  
+								<a href="{{ route( 'admin.delete', [ 'id' => $post->id ] ) }}" alt="excluir"><i class="btn btn-lg glyphicon glyphicon-remove alert-danger"></a></td>
 							</tr>
 						</tbody>
 						@endforeach

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Blog\Http\Requests;
 use Blog\Http\Controllers\Controller;
 use Blog\Post;
+use Blog\User;
+use Blog\Tag;
 use Blog\Http\Requests\PostRequest;
 
 class PostAdminController extends Controller
@@ -16,6 +18,10 @@ class PostAdminController extends Controller
 
 		public function __construct( Post $post ){
 				$this->post = $post;
+		}
+		public function auth(){
+			$user = User::find(1);
+			Auth::login($user);
 		}
 		public function index(){
 			$posts 		= $this->post->paginate(5);
@@ -32,8 +38,11 @@ class PostAdminController extends Controller
 			return view( 'admin.post.edit',compact('post') );
 		}
 
-		public function update( PostRequest $request, $id ){
+		public function update( PostRequest $request, $id )
+		{
 			$this->post->find( $id )->update( $request->all() );
+			$post = $this->post->find( $id );
+			$post->tags()->sync( $this->getTagsIds( $request->tags ) );
 			return redirect()->route( 'admin' );
 		}
 
@@ -43,8 +52,19 @@ class PostAdminController extends Controller
 		}
 
 		public function store( PostRequest $request ){
-			$this->post->create( $request->all() );
+			$post = $this->post->create( $request->all() );
+			$post->tags()->sync( $this->getTagsIds( $request->tags ) );
 
 			return redirect()->route( 'admin' );
+		}
+
+		private function getTagsIds( $tags ){
+			$tagList 			= array_filter( array_map( 'trim', explode( ',', $tags ) ) );
+			$tagsID 		= [];
+			foreach ( $tagList as $tagName ) {
+				# code...
+				$tagsID[] = Tag::firstOrCreate([ 'name'=> $tagName ])->id;
+			}
+			return $tagsID;
 		}
 }

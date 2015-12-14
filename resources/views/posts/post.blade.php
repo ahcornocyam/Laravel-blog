@@ -7,6 +7,13 @@
 		</header>
 		<article>
 			<section class="text-justify panel-body">{{$post->content}}</section>
+			<section>
+				<p class="text-right"><b>Tags: </b>
+					@foreach ( $post->tags as $tag )
+						<a href="{{$tag->name}}">{{ $tag->name }}</a>
+					@endforeach
+				</p>
+			</section>
 			<section class="pull-right">
 				<a href="{{ route('blog') }}" class="btn btn-link">voltar</a>
 			</section>
@@ -26,7 +33,6 @@
 					<div class="panel-body">
 						<p>{{$comment->comment}}</p>
 					</div>
-
 				</article>
 				@endforeach
 			</section>

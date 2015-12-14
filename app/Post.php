@@ -11,13 +11,19 @@ class Post extends Model
     		'title',
     		'content',
     ];
-    
+
     public function comments(){
     	return $this->hasMany( 'Blog\Coment' );
     }
-    
+
     public function tags() {
-    	
+
     	return $this->belongsToMany( 'Blog\Tag','posts_tags' );
     }
+
+		public function getTagsListAttribute(){
+			$tagList = $this->tags->lists('name')->all();
+
+			return implode( ', ',$tagList );
+		}
 }
