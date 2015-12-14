@@ -13,6 +13,11 @@ class Post extends Model
     ];
     
     public function comments(){
-    	return $this->hasMany('Blog\Coment');
+    	return $this->hasMany( 'Blog\Coment' );
+    }
+    
+    public function tags() {
+    	
+    	return $this->belongsToMany( 'Blog\Tag','posts_tags' );
     }
 }

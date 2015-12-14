@@ -12,11 +12,15 @@ use Blog\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::group( [ 'prefix'=>'blog','where'=>[ 'id'=>'[0-9]+' ] ],function(){
+Route::group( [ 'prefix'=>'/','where'=>[ 'id'=>'[0-9]+' ] ],function(){
 	get( '/',[ 'as'=> 'blog', 'uses'=>'PostsController@index' ] );
 	get( '/{id?}/post',[ 'as'=> 'blog.post', 'uses'=>'PostsController@post' ] );
+} );
+Route::group( [ 'prefix' => 'admin', 'where' => ['id' => '[0-9]+'] ], function(){
+	get('/', ['as' => 'admin', 'uses' => 'PostAdminController@index'] );
+	get( '/posts/novo', [ 'as'=> 'admin.create', 'uses' => 'PostAdminController@create' ] );
+	post( '/posts/store', ['as' =>'admin.store', 'uses'=> 'PostAdminController@store'] );
+	get('/posts/edit/{id?}', ['as' => 'admin.edit', 'uses'=> 'PostAdminController@edit']);
+	put( '/update/{id?}', ['as'=>'admin.update','uses'=> 'PostAdminController@update'] );
+	get( '/delete/{id?}', ['as'=>'admin.delete','uses'=> 'PostAdminController@destroy'] );
 } );

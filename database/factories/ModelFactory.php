@@ -1,4 +1,6 @@
 <?php
+use Blog\Tag;
+use Faker\Generator;
 
 
 
@@ -25,6 +27,12 @@ $factory->define(Blog\User::class, function (Faker\Generator $faker) {
 $factory->define(Blog\Post::class, function (Faker\Generator $faker ){
 	return [
 			'title' 	=> $faker->sentence,
-			'content'	=> $faker->text
+			'content'	=> $faker->text,			
 	];
+} );
+
+$factory->define( Blog\Tag::class, function(Faker\Generator $faker ){
+		return [
+			'name' => $faker->word,
+		];
 } );

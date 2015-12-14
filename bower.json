@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Alexandre Roch <maycon.alex.rocha@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ahcornocyam/Laravel-blog",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
